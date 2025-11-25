@@ -1,9 +1,13 @@
-// Store user answers in sessionStorage
+//your JS code here.
+
+// Display the quiz questions and choices
+const questionsElement = document.getElementById("questions");
+
+// Store user answers from session
 let userAnswers = JSON.parse(sessionStorage.getItem("answers")) || [];
 
-// Function to render questions
 function renderQuestions() {
-  questionsElement.innerHTML = ""; // clear old content if any
+  questionsElement.innerHTML = "";
 
   for (let i = 0; i < questions.length; i++) {
     const question = questions[i];
@@ -22,7 +26,7 @@ function renderQuestions() {
       radio.value = choice;
 
       if (userAnswers[i] === choice) {
-        radio.checked = true; // restore previous selection
+        radio.checked = true;
       }
 
       radio.addEventListener("change", (e) => {
@@ -41,9 +45,9 @@ function renderQuestions() {
   }
 }
 
+// Call it after declaration of questionsElement
 renderQuestions();
 
-// Submit button logic
 document.getElementById("submit").addEventListener("click", () => {
   let score = 0;
 
@@ -54,7 +58,5 @@ document.getElementById("submit").addEventListener("click", () => {
   }
 
   document.getElementById("score").textContent = `Your score is ${score} out of ${questions.length}.`;
-
-  // Save score in localStorage
   localStorage.setItem("score", score);
 });
